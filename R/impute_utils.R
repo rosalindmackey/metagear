@@ -8,7 +8,7 @@ impute_SD_Bracken1992 <- function(aDataFrame,
     imputedDataColumn <- aDataFrame[columnSDnames[i]]
     missingness <- is.na(imputedDataColumn) 
     SD_to_mean_ratio <- sum(imputedDataColumn, na.rm = TRUE) / 
-                          sum(aDataFrame[columnXnames[i]], na.rm = TRUE)
+                          sum(aDataFrame[columnXnames[i]][!missingness], na.rm = TRUE)
     X_of_missing_SD <- aDataFrame[[columnXnames[i]]][missingness]
     imputedDataColumn[missingness] <- X_of_missing_SD * SD_to_mean_ratio
     aDataFrame[columnSDnames[i]] <- imputedDataColumn
